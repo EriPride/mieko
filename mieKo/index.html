@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mie Ko Order - Mie Karbonara Special</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid white;
+            background-color: #fff;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .instagram {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .instagram:hover {
+            text-decoration: underline;
+        }
+        
+        .menu-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-name {
+            font-weight: bold;
+            flex: 2;
+        }
+        
+        .menu-price {
+            flex: 1;
+            text-align: right;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .menu-level {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .option-group {
+            margin-bottom: 20px;
+        }
+        
+        .option-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .radio-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            margin-right: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #ff6b6b;
+        }
+        
+        .payment-method.selected {
+            border: 2px solid #ff6b6b;
+            background-color: #fff9f9;
+        }
+        
+        .payment-method img {
+            width: 100%;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        
+        .payment-method .name {
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .payment-details {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px dashed #ccc;
+        }
+        
+        .payment-details.show {
+            display: block;
+        }
+        
+        .payment-details p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .payment-details strong {
+            color: #ff6b6b;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+        }
+        
+        .note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Enhanced Map Styles */
+        .map-container {
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        
+        .location-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .location-inputs input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        #current-location {
+            background: #4285F4;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        #get-direction {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .distance-info {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            right: 10px;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        @media (max-width: 600px) {
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .menu-price {
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img class="logo" src="https://ik.imagekit.io/lvuof318l/Mangkuk%20Mie%20dan%20Hewan%20Lucu%20untuk%20Logo%20Makanan%20Biru_20250610_122644_0000.jpg?updatedAt=1750129121026" alt="Mie Ko Logo">
+            <h1>Mie Ko Order</h1>
+            <a href="https://www.instagram.com/miekobonara" class="instagram" target="_blank">@miekobonara</a>
+            <p>Pesan Mie Karbonara Favoritmu Sekarang!</p>
+        </header>
+        
+        <div class="menu-section">
+            <h2>Menu Mie Karbonara</h2>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">0</span>
+                    Mie Karbonara Level 0
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">1</span>
+                    Mie Karbonara Level 1
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">2</span>
+                    Mie Karbonara Level 2
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">3</span>
+                    Mie Karbonara Level 3
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">4</span>
+                    Mie Karbonara Level 4
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-name">
+                    <span class="menu-level">5</span>
+                    Mie Karbonara Level 5
+                </div>
+                <div class="menu-price">Rp 23.000</div>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <h2>Pilihan Menu</h2>
+            
+            <div class="option-group">
+                <span class="option-title">Tipe Menu:</span>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="non-veg" name="menu-type" value="non-vegetarian" checked>
+                        <label for="non-veg">Non Vegetarian</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="veg" name="menu-type" value="vegetarian">
+                        <label for="veg">Vegetarian</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Jumlah Pesanan:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Catatan (Opsional):</label>
+                <textarea id="notes" name="notes" placeholder="Contoh: Pedas level 3, tambah keju, dll."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Alamat Pengiriman:</label>
+                <textarea id="address" name="address" required placeholder="Masukkan alamat lengkap Anda"></textarea>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <h2>Metode Pembayaran</h2>
+            
+            <div class="payment-methods">
+                <div class="payment-method" data-method="gopay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/1200px-Gopay_logo.svg.png" alt="GoPay">
+                    <div class="name">GoPay</div>
+                </div>
+                
+                <div class="payment-method" data-method="dana">
+                    <img src="https://ik.imagekit.io/lvuof318l/dana-e-wallet-app-seeklogo.png?updatedAt=1750129788256" alt="DANA">
+                    <div class="name">DANA</div>
+                </div>
+                
+                <div class="payment-method" data-method="seabank">
+                    <img src="https://ik.imagekit.io/lvuof318l/seabank-seeklogo.png?updatedAt=1750130238763<" alt="SeaBank">
+                    <div class="name">SeaBank</div>
+                </div>
+                
+                <div class="payment-method" data-method="jago">
+                    <img src="https://ik.imagekit.io/lvuof318l/GKL8_Logo%20Bank%20Jago%20-%20Koleksilogo.com.png?updatedAt=1750131156121" alt="Jago">
+                    <div class="name">Bank Jago</div>
+                </div>
+            </div>
+            
+            <div id="gopay-details" class="payment-details">
+                <p>Silakan transfer ke nomor GoPay berikut:</p>
+                <p><strong>+62895610977736</strong></p>
+                <p>Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan mengirim bukti transfer.</p>
+            </div>
+            
+            <div id="dana-details" class="payment-details">
+                <p>Silakan transfer ke nomor DANA berikut:</p>
+                <p><strong>+6282379705535</strong></p>
+                <p>Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan mengirim bukti transfer.</p>
+            </div>
+            
+            <div id="seabank-details" class="payment-details">
+                <p>Silakan transfer ke rekening SeaBank berikut:</p>
+                <p><strong>901903730296</strong></p>
+                <p>A/n Alexander Junico</p>
+                <p>Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan mengirim bukti transfer.</p>
+            </div>
+            
+            <div id="jago-details" class="payment-details">
+                <p>Silakan transfer ke rekening Jago berikut:</p>
+                <p><strong>102048197654</strong></p>
+                <p>A/n Alexander Junico</p>
+                <p>Setelah melakukan pembayaran, harap konfirmasi melalui WhatsApp dengan mengirim bukti transfer.</p>
+            </div>
+        </div>
+        
+        <button class="btn" id="order-btn">Pesan Sekarang</button>
+        
+        <div class="note">
+            Ket: Gratis ongkir (SnK berlaku)
+        </div>
+
+    <script>
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentDetails = document.querySelectorAll('.payment-details');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                // Remove selected class from all methods
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                
+                // Add selected class to clicked method
+                method.classList.add('selected');
+                
+                // Hide all payment details
+                paymentDetails.forEach(detail => detail.classList.remove('show'));
+                
+                // Show selected payment details
+                const methodName = method.getAttribute('data-method');
+                document.getElementById(`${methodName}-details`).classList.add('show');
+            });
+        });
+        
+        // Order button click
+        document.getElementById('order-btn').addEventListener('click', () => {
+            const selectedMethod = document.querySelector('.payment-method.selected');
+            
+            if (!selectedMethod) {
+                alert('Silakan pilih metode pembayaran terlebih dahulu');
+                return;
+            }
+            
+            const address = document.getElementById('address').value;
+            if (!address) {
+                alert('Silakan masukkan alamat pengiriman');
+                return;
+            }
+            
+            // Get all order details
+            const menuType = document.querySelector('input[name="menu-type"]:checked').value;
+            const quantity = document.getElementById('quantity').value;
+            const notes = document.getElementById('notes').value;
+            const paymentMethod = selectedMethod.querySelector('.name').textContent;
+            
+            // Create WhatsApp message
+            const whatsappNumber = '+6289667614747';
+            let message = `Halo Mie Ko, saya ingin memesan:\n\n`;
+            message += `*Tipe Menu:* ${menuType}\n`;
+            message += `*Jumlah Pesanan:* ${quantity}\n`;
+            message += `*Alamat Pengiriman:* ${address}\n`;
+            message += `*Metode Pembayaran:* ${paymentMethod}\n`;
+            
+            if (notes) {
+                message += `*Catatan:* ${notes}\n`;
+            }
+            
+            message += `\nSaya ingin mengkonfirmasi pesanan ini. Terima kasih!`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Open WhatsApp with the order details
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        });
+        
+        // Select first payment method by default
+        paymentMethods[0].click();
+
+        // Google Maps Implementation
+        let map;
+        let userMarker;
+        let directionsService;
+        let directionsRenderer;
+        const storeLocation = { lat: -6.194742, lng: 106.819561 }; // Replace with your store coordinates
+
+        function initMap() {
+            // Initialize map
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: storeLocation,
+                zoom: 15,
+            });
+
+            // Add store marker
+            new google.maps.Marker({
+                position: storeLocation,
+                map: map,
+                title: "Mie Ko Store",
+                icon: {
+                    url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
+            });
+
+            // Initialize directions service
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            // Initialize autocomplete for destination
+            const destinationInput = document.getElementById("destination");
+            const autocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+            // Current location button
+            document.getElementById("current-location").addEventListener("click", () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const userLocation = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            
+                            map.setCenter(userLocation);
+                            
+                            if (userMarker) {
+                                userMarker.setPosition(userLocation);
+                            } else {
+                                userMarker = new google.maps.Marker({
+                                    position: userLocation,
+                                    map: map,
+                                    title: "Lokasi Anda",
+                                    icon: {
+                                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                                    }
+                                });
+                            }
+                            
+                            // Update origin input
+                            const geocoder = new google.maps.Geocoder();
+                            geocoder.geocode({ location: userLocation }, (results, status) => {
+                                if (status === "OK" && results[0]) {
+                                    document.getElementById("origin").value = results[0].formatted_address;
+                                }
+                            });
+                        },
+                        () => {
+                            alert("Tidak dapat mendapatkan lokasi Anda");
+                        }
+                    );
+                }
+            });
+
+            // Get direction button
+            document.getElementById("get-direction").addEventListener("click", () => {
+                const destination = document.getElementById("destination").value;
+                const origin = document.getElementById("origin").value;
+                
+                if (!destination) {
+                    alert("Masukkan tujuan terlebih dahulu");
+                    return;
+                }
+                
+                calculateAndDisplayRoute(origin || map.getCenter(), destination);
+            });
+        }
+
+        function calculateAndDisplayRoute(origin, destination) {
+            directionsService.route(
+                {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                },
+                (response, status) => {
+                    if (status === "OK") {
+                        directionsRenderer.setDirections(response);
+                        
+                        // Show distance and duration
+                        const route = response.routes[0];
+                        const distance = route.legs[0].distance.text;
+                        const duration = route.legs[0].duration.text;
+                        
+                        document.getElementById("distance-text").textContent = distance;
+                        document.getElementById("duration-text").textContent = duration;
+                        document.getElementById("distance-info").style.display = "block";
+                    } else {
+                        alert("Gagal menemukan rute: " + status);
+                    }
+                }
+            );
+        }
+
+        function handleLocationError(browserHasGeolocation) {
+            alert(browserHasGeolocation ?
+                "Error: Layanan geolokasi gagal." :
+                "Error: Browser Anda tidak mendukung geolokasi.");
+        }
+    </script>
+</body>
+</html>
